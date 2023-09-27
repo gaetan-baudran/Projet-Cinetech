@@ -243,122 +243,122 @@ fetchDataFromServer(
   }
 );
 
-const heroBannerSeries = function ({ results: seriesList }) {
-  const banner = document.createElement("section");
-  banner.classList.add("banner");
-  banner.ariaLabel = "Popular Series";
+// const heroBannerSeries = function ({ results: seriesList }) {
+//   const banner = document.createElement("section");
+//   banner.classList.add("banner");
+//   banner.ariaLabel = "Popular Series";
 
-  banner.innerHTML = `
-    <div class="banner-slider"></div>
+//   banner.innerHTML = `
+//     <div class="banner-slider"></div>
 
-     <div class="slider-control">
-      <div class="control-inner"></div>
-     </div>
-   `;
-  console.log(banner);
+//      <div class="slider-control">
+//       <div class="control-inner"></div>
+//      </div>
+//    `;
+  
 
-  let controlItemIndex = 0;
+//   let controlItemIndex = 0;
 
-  for (const [index, series] of seriesList.entries()) {
-    const {
-      backdrop_path,
-      name,
-      first_air_date,
-      genre_ids,
-      overview,
-      poster_path,
-      vote_average,
-      id,
-    } = series;
+//   for (const [index, series] of seriesList.entries()) {
+//     const {
+//       backdrop_path,
+//       name,
+//       first_air_date,
+//       genre_ids,
+//       overview,
+//       poster_path,
+//       vote_average,
+//       id,
+//     } = series;
 
-    const sliderItem = document.createElement("div");
-    sliderItem.classList.add("slider-item");
-    sliderItem.setAttribute("slider-item", "");
+//     const sliderItem = document.createElement("div");
+//     sliderItem.classList.add("slider-item");
+//     sliderItem.setAttribute("slider-item", "");
 
-    sliderItem.innerHTML = `
-      <img src="${imageBaseURL}w1280${backdrop_path}" alt="${name}" class="img-cover" loading=${
-      index === 0 ? "eager" : "lazy"
-    }>
+//     sliderItem.innerHTML = `
+//       <img src="${imageBaseURL}w1280${backdrop_path}" alt="${name}" class="img-cover" loading=${
+//       index === 0 ? "eager" : "lazy"
+//     }>
       
-      <div class="banner-content">
+//       <div class="banner-content">
       
-        <h2 class="heading">${name}</h2>
+//         <h2 class="heading">${name}</h2>
       
-        <div class="meta-list">
-          <div class="meta-item">${
-            first_air_date?.split("-")[0] ?? "Not Released"
-          }</div>
+//         <div class="meta-list">
+//           <div class="meta-item">${
+//             first_air_date?.split("-")[0] ?? "Not Released"
+//           }</div>
       
-          <div class="meta-item card-badge">${vote_average.toFixed(1)}</div>
-        </div>
+//           <div class="meta-item card-badge">${vote_average.toFixed(1)}</div>
+//         </div>
       
-        <p class="genre">${genre_ids
-          .map((genreId) => genreListSeries[genreId])
-          .join(", ")}</p>
+//         <p class="genre">${genre_ids
+//           .map((genreId) => genreListSeries[genreId])
+//           .join(", ")}</p>
       
-        <p class="banner-text">${overview}</p>
+//         <p class="banner-text">${overview}</p>
       
-        <a href="./detail2.html" class="btn" onclick="getSeriesDetail(${id})">
-          <img src="./assets/images/play_circle.png" width="24" height="24" aria-hidden="true" alt="play circle">
+//         <a href="./detail2.html" class="btn" onclick="getSeriesDetail(${id})">
+//           <img src="./assets/images/play_circle.png" width="24" height="24" aria-hidden="true" alt="play circle">
       
-          <span class="span">Watch Now</span>
-        </a>
+//           <span class="span">Watch Now</span>
+//         </a>
       
-      </div>
-    `;
-    banner.querySelector(".banner-slider").appendChild(sliderItem);
+//       </div>
+//     `;
+//     banner.querySelector(".banner-slider").appendChild(sliderItem);
 
-    const controlItem = document.createElement("button");
-    controlItem.classList.add("poster-box", "slider-item");
-    controlItem.setAttribute("slider-control", `${controlItemIndex}`);
+//     const controlItem = document.createElement("button");
+//     controlItem.classList.add("poster-box", "slider-item");
+//     controlItem.setAttribute("slider-control", `${controlItemIndex}`);
 
-    controlItemIndex++;
+//     controlItemIndex++;
 
-    controlItem.innerHTML = `
-      <img src="${imageBaseURL}w154${poster_path}" alt="Slide to ${name}" loading="lazy" draggable="false"
-      lass="img-cover">
-      `;
-    banner.querySelector(".control-inner").appendChild(controlItem);
-  }
+//     controlItem.innerHTML = `
+//       <img src="${imageBaseURL}w154${poster_path}" alt="Slide to ${name}" loading="lazy" draggable="false"
+//       lass="img-cover">
+//       `;
+//     banner.querySelector(".control-inner").appendChild(controlItem);
+//   }
 
-  pageContent.appendChild(banner);
+//   pageContent.appendChild(banner);
 
-  addHeroSlideSeries();
+//   addHeroSlideSeries();
 
-  for (const { title, path } of homePageSectionsSeries) {
-    fetchDataFromServer(
-      ` https://api.themoviedb.org/3${path}?api_key=${api_key}&page=1`,
-      (data) => createSeriesList(data, title)
-    );
-  }
-};
+//   for (const { title, path } of homePageSectionsSeries) {
+//     fetchDataFromServer(
+//       ` https://api.themoviedb.org/3${path}?api_key=${api_key}&page=1`,
+//       (data) => createSeriesList(data, title)
+//     );
+//   }
+// };
 
-const addHeroSlideSeries = function () {
-  const sliderItems = document.querySelectorAll("[slider-item]");
-  const sliderControls = document.querySelectorAll("[slider-control]");
+// const addHeroSlideSeries = function () {
+//   const sliderItems = document.querySelectorAll("[slider-item]");
+//   const sliderControls = document.querySelectorAll("[slider-control]");
 
-  let lastSliderItem = sliderItems[0];
-  let lastSliderControl = sliderControls[0];
+//   let lastSliderItem = sliderItems[0];
+//   let lastSliderControl = sliderControls[0];
 
-  lastSliderItem.classList.add("active");
-  lastSliderControl.classList.add("active");
+//   lastSliderItem.classList.add("active");
+//   lastSliderControl.classList.add("active");
 
-  const sliderStart = function () {
-    lastSliderItem.classList.remove("active");
-    lastSliderControl.classList.remove("active");
+//   const sliderStart = function () {
+//     lastSliderItem.classList.remove("active");
+//     lastSliderControl.classList.remove("active");
 
-    // `this` == slider-control
-    sliderItems[Number(this.getAttribute("slider-control"))].classList.add(
-      "active"
-    );
-    this.classList.add("active");
+//     // `this` == slider-control
+//     sliderItems[Number(this.getAttribute("slider-control"))].classList.add(
+//       "active"
+//     );
+//     this.classList.add("active");
 
-    lastSliderItem = sliderItems[Number(this.getAttribute("slider-control"))];
-    lastSliderControl = this;
-  };
+//     lastSliderItem = sliderItems[Number(this.getAttribute("slider-control"))];
+//     lastSliderControl = this;
+//   };
 
-  addEventOnElements(sliderControls, "click", sliderStart);
-};
+//   addEventOnElements(sliderControls, "click", sliderStart);
+// };
 
 //   const sliderItems = document.querySelectorAll("[slider-item]");
 //   const sliderControls = document.querySelectorAll("[slider-control]");
